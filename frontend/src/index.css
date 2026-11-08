@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-[#0a0a0f] text-zinc-100 min-h-screen;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 50% -10%, rgba(244, 63, 94, 0.14), transparent),
+      radial-gradient(ellipse 50% 35% at 85% 10%, rgba(99, 102, 241, 0.10), transparent);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/[0.04] border border-white/[0.08] rounded-2xl backdrop-blur-xl;
+  }
+}

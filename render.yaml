@@ -1,0 +1,42 @@
+# Render Blueprint — deploys both services from this repo.
+# "New + > Blueprint" in the Render dashboard → select this repo → it reads
+# this file. Service names become *.onrender.com URLs (edit them to taste, but
+# keep frontend envVar + backend CORS_ORIGINS pointing at the same names).
+
+services:
+  # ---- Backend: FastAPI + yt-dlp ------------------------------------------
+  - type: web
+    name: yt-downloader-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: apt-get update && apt-get install -y ffmpeg && pip install -r requirements.txt
+    startCommand: >-
+      gunicorn main:app
+      --workers 1
+      --worker-class uvicorn.workers.UvicornWorker
+      --threads 8
+      --host 0.0.0.0
+      --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      # Frontend origin(s) allowed to call the API. Must match the deployed
+      # frontend URL exactly (scheme + host, no trailing slash).
+      - key: CORS_ORIGINS
+        value: https://yt-downloader-frontend.onrender.com
+
+  # ---- Frontend: React + Vite static site ---------------------------------
+  - type: web
+    name: yt-downloader-frontend
+    runtime: static
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      # Absolute URL of the backend service. Available to the build (VITE_ prefix).
+      - key: VITE_API_BASE
+        value: https://yt-downloader-backend.onrender.com
+      - key: NODE_VERSION
+        value: 22

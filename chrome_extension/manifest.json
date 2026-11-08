@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "YT Downloader",
+  "version": "1.1.0",
+  "description": "Adds a Download button below YouTube videos that opens the YT Downloader web app with the video already pasted in.",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "YT Downloader",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://m.youtube.com/*"],
+      "css": ["content.css"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

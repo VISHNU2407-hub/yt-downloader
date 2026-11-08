@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        width: 320px;
+        margin: 0;
+        padding: 16px;
+        background: #181818;
+        color: #f1f1f1;
+        font-family: 'Segoe UI', Arial, sans-serif;
+      }
+      h1 {
+        font-size: 15px;
+        margin: 0 0 10px;
+      }
+      p {
+        font-size: 12px;
+        line-height: 1.5;
+        margin: 8px 0;
+        color: #aaa;
+      }
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px 10px;
+        margin: 4px 0 8px;
+        background: #0f0f0f;
+        border: 1px solid #333;
+        border-radius: 6px;
+        color: #f1f1f1;
+        font-size: 12px;
+      }
+      button {
+        width: 100%;
+        padding: 8px;
+        background: #dc2626;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #b91c1c;
+      }
+      #status {
+        display: block;
+        margin-top: 8px;
+        font-size: 12px;
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>YT Downloader</h1>
+    <p>
+      Open any YouTube video and click the <strong>Download</strong> button
+      below the player — it opens the downloader app with the video already
+      pasted in.
+    </p>
+    <label for="webapp">Web app URL</label>
+    <input id="webapp" type="text" spellcheck="false" />
+    <button id="save" type="button">Save</button>
+    <span id="status"></span>
+    <script src="popup.js"></script>
+  </body>
+</html>
